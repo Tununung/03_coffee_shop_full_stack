@@ -45,6 +45,8 @@ To run the server, execute:
 ```bash
 flask run --reload
 ```
+db_drop_and_create_all() in api.py must be uncommented on the first run to initialize the database. When the server is reloaded all records will be dropped and the database will start from scratch. Uncomment or remove it if let data be persisted.
+
 
 The `--reload` flag will detect file changes and restart the server automatically.
 
@@ -69,13 +71,25 @@ The `--reload` flag will detect file changes and restart the server automaticall
         - can `get:drinks-detail`
     - Manager
         - can perform all actions
-7. Test your endpoints with [Postman](https://getpostman.com). 
-    - Register 2 users - assign the Barista role to one and Manager role to the other.
-    - Sign into each account and make note of the JWT.
-    - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
-    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
-    - Run the collection and correct any errors.
-    - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
+
+## Testing
+Test your endpoints with [Postman](https://getpostman.com). 
+
+- Register 2 users - assign the Barista role to one and Manager role to the other.
+- Sign into each account and make note of the JWT. We will provide these JWTs in our tests.
+- Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
+- Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and include the JWT in the token field you made note of previusly.
+- Run the collection
+
+>_tip_: ensure you are providing a recent JWT to ensure it is not expired and the user has not logged out of the account.
+
+### Configure the application variables in `./src/auth/auth.py`:
+```
+    AUTH0_DOMAIN = {AUTH0 DOMAIN PREFIX}
+    ALGORITHMS = ['RS256']
+    API_AUDIENCE = {AUTH0 APP API AUDIENCE}
+``` 
+   
 
 ### Implement The Server
 
